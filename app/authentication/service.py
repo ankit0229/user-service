@@ -11,7 +11,7 @@ class AuthService:
     def __init__(self, db: Session):
         self.db = db
 
-    def authenticate_user(self, email: str, password: str):
+    def authenticate_user(self, email: str, password: str) -> User:
         """
         Authenticate a user by their email and password.
 
@@ -28,7 +28,7 @@ class AuthService:
             return None
         return user
 
-    def create_user_token(self, user: User):
+    def create_user_token(self, user: User) -> str:
         """
         Create a JWT access token for an authenticated user.
 

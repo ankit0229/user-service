@@ -42,7 +42,7 @@ class JWTMiddleware(BaseHTTPMiddleware):
 
                 if not payload:
                     raise HTTPException(status_code=403, detail="Invalid token")
-
+                # Storing payload containing the user_id in request state
                 request.state.user = payload
         except HTTPException as e:
             return JSONResponse({"detail": e.detail}, status_code=e.status_code)
@@ -50,5 +50,5 @@ class JWTMiddleware(BaseHTTPMiddleware):
         try:
             return await call_next(request)
         except HTTPException as e:
-            raise e  # Propagate the exception if it's not one you want to handle here
+            raise e
 

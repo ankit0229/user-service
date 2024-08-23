@@ -2,7 +2,6 @@ import logging
 
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import Session
-from fastapi import HTTPException
 
 from app.core.security import get_password_hash
 from app.users.models import User
@@ -18,7 +17,7 @@ class UserProfileService:
     def __init__(self, db: Session):
         self.db = db
 
-    def create_user(self, user_data: UserCreate):
+    def create_user(self, user_data: UserCreate) -> User:
         """
         Create a new user in the database.
 
@@ -50,7 +49,7 @@ class UserProfileService:
             logger.error(f"SQLAlchemy error while creating user: {str(e)}", exc_info=True)
             raise DatabaseQueryException("An error occurred while creating a new user.")
 
-    def get_user_by_id(self, user_id: int):
+    def get_user_by_id(self, user_id: int) -> User:
         """
         Retrieve a user by their ID.
 
@@ -62,7 +61,7 @@ class UserProfileService:
             raise UserNotFoundException("User not found with ID: {}".format(user_id))
         return user
 
-    def update_user_profile(self, user_id: int, profile_data: UserUpdate):
+    def update_user_profile(self, user_id: int, profile_data: UserUpdate) -> User:
         """
          Update the profile of an existing user.
 

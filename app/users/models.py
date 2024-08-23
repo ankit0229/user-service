@@ -1,12 +1,13 @@
+import logging
+
 from sqlalchemy import Column, Integer, String, DateTime, func
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 
 from app.db.base import Base
 from app.users.exceptions import DatabaseQueryException
 
-# Base = declarative_base()
+logger = logging.getLogger(__name__)
 
 
 class User(Base):
@@ -28,6 +29,7 @@ class User(Base):
         except NoResultFound:
             return None
         except SQLAlchemyError as e:
+            logger.error(f"SQLAlchemy error while getting user by id: {str(e)}", exc_info=True)
             raise DatabaseQueryException("Failed to retrieve user by email", original_exception=e)
 
     @classmethod
@@ -37,4 +39,5 @@ class User(Base):
         except NoResultFound:
             return None
         except SQLAlchemyError as e:
+            logger.error(f"SQLAlchemy error while getting user by email: {str(e)}", exc_info=True)
             raise DatabaseQueryException("Failed to retrieve user by email", original_exception=e)

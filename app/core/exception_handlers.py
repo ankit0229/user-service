@@ -16,6 +16,4 @@ def register_exception_handlers(app: FastAPI):
                 if callable(attribute) and hasattr(attribute, '__exception_class__'):
                     exception_class = getattr(attribute, '__exception_class__')
                     app.add_exception_handler(exception_class, attribute)
-                    print(exception_class)
-                    print(attribute)
 

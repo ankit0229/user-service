@@ -10,14 +10,13 @@ docker-compose up -d
 
 echo "Waiting for the database to be ready..."
 # Wait loop to ensure the database is ready before applying migrations
-until docker-compose exec db pg_isready --timeout=0 --dbname=your_db_name_here
+until docker-compose exec db pg_isready --timeout=0 --dbname=user_db
 do
   echo "Waiting for the database to become available..."
   sleep 2
 done
 
 echo "Database is ready."
-# Uncomment the next line to apply migrations when the database is ready
 echo "Applying database migrations..."
 docker-compose exec web alembic upgrade head
 

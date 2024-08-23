@@ -22,7 +22,7 @@ This FastAPI application is designed to manage user registration, login, and pro
 
 ## Running the Server
 
-The service is fully dockerized, including PostgreSQL and PGAdmin. The `run.sh` file contains commands to build and run the containers seamlessly.
+The service is fully dockerized, including PostgreSQL and PGAdmin. The `run.sh` file contains commands to build and run the containers.
 
 ### Prerequisites
 
