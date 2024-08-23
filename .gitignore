@@ -1,0 +1,16 @@
+# Python specific
+__pycache__/
+*.py[cod]
+venv/
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+
+# Logs
+*.log
+
+# MacOS
+.DS_Store
+
+# Docker
+docker-compose.override.yml
